@@ -1,0 +1,38 @@
+.bg-image {
+	background-image: url("./images/doctor.jpeg");
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: center;
+}
+
+.main-bg-image {
+	background-image: url("./images/healthcare.jpeg");
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: center;
+}
+
+.card {
+	border: 1px solid #ccc;
+	border-radius: 10px;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.card-title {
+	font-size: 1.5rem;
+	font-weight: bold;
+}
+
+.card-text {
+	font-size: 1.2rem;
+	margin-bottom: 1rem;
+}
+
+.image-container {
+    width: 300px; /* set the width of the container */
+    height: 300px; /* set the height of the container */
+    background-image: url("./images/appointment.jpeg"); /* set the background image */
+    background-repeat: no-repeat;
+	background-size: cover;
+	background-position: center;
+}
