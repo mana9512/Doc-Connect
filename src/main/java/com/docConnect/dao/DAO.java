@@ -32,7 +32,6 @@ public class DAO {
     }
 
     protected void begin() {
-
         getSession().beginTransaction();
     }
 

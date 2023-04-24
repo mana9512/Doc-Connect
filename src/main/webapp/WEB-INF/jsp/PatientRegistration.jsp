@@ -33,30 +33,39 @@
         <form:form modelAttribute="patient" method="post" action="register/patient.htm">
             <div class="form-group">
                 <label for="name">Name</label>
-                <input type="text" class="form-control" id="name" name="name" required>
+                <input type="text" class="form-control" id="name" name="name">
+                <font color="red"><form:errors  path="name" /></font>
+
             </div>
             <div class="form-group">
                 <label for="email">Email</label>
-                <input type="email" class="form-control" id="email" name="email" required>
+                <input type="email" class="form-control" id="email" name="email">
+                <font color="red"><form:errors  path="email" /></font>
+
             </div>
             <div class="form-group">
                 <label for="password">Password</label>
-                <input type="password" class="form-control" id="password" name="password" required>
+                <input type="password" class="form-control" id="password" name="password">
+                <font color="red"><form:errors  path="password" /></font>
+
             </div>
             <div class="form-group">
                 <label for="age">Age</label>
-                <input type="number" class="form-control" id="age" name="age" min="1" max="120" required>
+                <input type="number" class="form-control" id="age" name="age" min="1" max="120">
+                <font color="red"><form:errors  path="age" /></font>
             </div>
             <div class="form-group">
                 <label for="gender">Gender</label>
                 <div class="form-check">
-                    <input class="form-check-input" type="radio" name="gender" id="male" value="male" required>
+                    <input class="form-check-input" type="radio" name="gender" id="male" value="male">
                     <label class="form-check-label" for="male">Male</label>
                 </div>
                 <div class="form-check">
                     <input class="form-check-input" type="radio" name="gender" id="female" value="female">
                     <label class="form-check-label" for="female">Female</label>
                 </div>
+                <font color="red"><form:errors  path="gender" /></font>
+
             </div>
             <button type="submit" class="btn btn-primary btn-block" style="margin-top:20px">Register</button>
         </form:form>

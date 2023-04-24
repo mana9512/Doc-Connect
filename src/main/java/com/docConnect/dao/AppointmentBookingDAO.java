@@ -6,8 +6,7 @@ import org.hibernate.HibernateException;
 import org.hibernate.query.Query;
 import org.springframework.stereotype.Component;
 
-import com.docConnect.pojo.AppointmentBooking;
-import com.docConnect.pojo.Patient;
+import com.docConnect.pojo.*;
 
 @Component
 public class AppointmentBookingDAO extends DAO {
@@ -29,12 +28,20 @@ public class AppointmentBookingDAO extends DAO {
 		}
 	}
 
-	public List<AppointmentBooking> fetchPatientAppointments(Patient p) throws Exception {
+	public List<AppointmentBooking> fetchAppointments(Object obj) throws Exception {
 		try {
 			begin();
-			Integer patientId = p.getId();
-			Query query = getSession().createQuery("From AppointmentBooking where patient=:patient");
-			query.setParameter("patient", p);
+			Query query;
+			if(obj instanceof Patient) {
+				Patient patient = (Patient) obj;
+				query = getSession().createQuery("From AppointmentBooking where patient=:patient");
+				query.setParameter("patient", patient);
+			} else {
+				Doctor doc = (Doctor) obj;
+				query = getSession().createQuery("From AppointmentBooking where doctor=:doctor");
+				query.setParameter("doctor", doc);
+			}
+			
 			List<AppointmentBooking> appointments = query.list();
 			commit();
 			System.out.println("appointmetns" + appointments.toString());

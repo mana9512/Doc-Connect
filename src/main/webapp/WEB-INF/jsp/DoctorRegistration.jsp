@@ -29,14 +29,20 @@
             <div class="form-group">
                 <label for="name">Name</label>
                 <input type="text" class="form-control" id="name" name="name" required>
+                <font color="red"><form:errors  path="name" /></font>
+
             </div>
             <div class="form-group">
                 <label for="email">Email</label>
                 <input type="email" class="form-control" id="email" name="email" required>
+                <font color="red"><form:errors  path="email" /></font>
+
             </div>
             <div class="form-group">
                 <label for="password">Password</label>
                 <input type="password" class="form-control" id="password" name="password" required>
+                <font color="red"><form:errors  path="password" /></font>
+
             </div>
     
             <div class="form-group">
@@ -50,6 +56,7 @@
                     <option value="Oncologist">Oncologist</option>
                     <option value="Pediatrician">Pediatrician</option>
                 </select>
+                <font color="red"><form:errors  path="specialization" /></font>
             </div>
             <button type="submit" style="margin-top:15px" class="btn btn-primary btn-block">Register</button>
         </form:form>

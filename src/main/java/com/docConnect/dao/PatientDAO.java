@@ -59,7 +59,7 @@ public class PatientDAO extends DAO {
 		}
 	}
 
-	public List<DoctorAvailability> fetchAppointments() {
+	public List<DoctorAvailability> fetchDoctorAvailabilities() {
 		try {
 			begin();
 			Query query = getSession().createQuery("from DoctorAvailability");

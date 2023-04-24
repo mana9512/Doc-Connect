@@ -63,7 +63,7 @@ public class PatientController {
 
 		PatientDAO patientDao = new PatientDAO();
 
-		List<DoctorAvailability> timings = patientDao.fetchAppointments();
+		List<DoctorAvailability> timings = patientDao.fetchDoctorAvailabilities();
 		HashMap<Doctor, HashMap<Date, List<Time>>> doctorAvailabilities = new HashMap<>();
 		for (DoctorAvailability availability : timings) {
 			Doctor doctor = availability.getDoctor();
@@ -102,9 +102,11 @@ public class PatientController {
 		DoctorDAO docdao = new DoctorDAO();
 		Integer doctorId = Integer.parseInt(request.getParameter("doctorId"));
 		Doctor d = docdao.getDoctorById(doctorId);
+		System.out.println("---doc---"+d.toString());
 		Patient patient = (Patient) session.getAttribute("patient");
 		booking.setPatient(patient);
 		booking.setDoctor(d);
+		System.out.println("---bookin---"+booking);
 		AppointmentBookingDAO dao = new AppointmentBookingDAO();
 		dao.save(booking);
 		status.setComplete();
@@ -127,7 +129,7 @@ public class PatientController {
 		AppointmentBookingDAO appdao = new AppointmentBookingDAO();
 		Patient patient = (Patient) session.getAttribute("patient");
 		System.out.print("---------patient---------" + patient);
-		List<AppointmentBooking> appointments = appdao.fetchPatientAppointments(patient);
+		List<AppointmentBooking> appointments = appdao.fetchAppointments(patient);
 		mv.setViewName("PatientUpcomingAppointments");
 		mv.addObject("appointments", appointments);
 		return mv;

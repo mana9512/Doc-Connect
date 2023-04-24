@@ -61,7 +61,7 @@ public class DoctorAvailability {
 
 	@Override
 	public String toString() {
-		return "DoctorAvailability [availabilityId=" + availabilityId + ", doctor=" + doctor.getName()
+		return "DoctorAvailability [availabilityId=" + availabilityId + ", doctor=" + doctor
 				+ ", availableDate="
 				+ availableDate + ", availableTime=" + availableTime + "]";
 	}
