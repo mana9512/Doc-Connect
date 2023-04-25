@@ -34,6 +34,7 @@ public class DoctorController {
 		docvalidator.validate(doctor, result);
 
 		if (result.hasErrors()) {
+			//redirect:/register.htm?role=doctor
 			mv.setViewName("DoctorRegistration");
 			return mv;
 		}

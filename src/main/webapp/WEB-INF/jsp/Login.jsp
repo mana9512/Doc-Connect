@@ -81,9 +81,14 @@
                         </div>
                        
                         <button type="submit" class="btn btn-primary">Login</button>
+                        <font color="red"><form:errors  path="*" /></font>
+                        <hr> <p style="text-align:center">or</p> <hr>
+                        <a href="/doc-connect" style="margin-top:15px" class="btn btn-primary btn-block">Sign Up</a>
+
                         
                         </br>
-                        <font color="red"><form:errors  path="*" /></font>
+                       
+                        
                     </form:form>
                 </div>
             </div>

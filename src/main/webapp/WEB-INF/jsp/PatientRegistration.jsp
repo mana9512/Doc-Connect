@@ -1,11 +1,11 @@
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
-
+<%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 
 <head>
-<jsp:include page="Header.jsp" />
+    <jsp:include page="Header.jsp" />
     <style>
         body {
             background-color: #f8f9fa;
@@ -30,44 +30,57 @@
 <body>
     <div class="form-container mt-5">
         <h1>Patient Registration Form</h1>
-        <form:form modelAttribute="patient" method="post" action="register/patient.htm">
+        <form:form modelAttribute="patient" method="post" action="/doc-connect/register/patient.htm">
             <div class="form-group">
                 <label for="name">Name</label>
-                <input type="text" class="form-control" id="name" name="name">
-                <font color="red"><form:errors  path="name" /></font>
+                <form:input type="text" class="form-control" id="name" path="name" />
+                <font color="red">
+                    <form:errors path="name" />
+                </font>
 
             </div>
             <div class="form-group">
                 <label for="email">Email</label>
-                <input type="email" class="form-control" id="email" name="email">
-                <font color="red"><form:errors  path="email" /></font>
+                <form:input type="email" class="form-control" id="email" path="email" />
+                <font color="red">
+                    <form:errors path="email" />
+                </font>
 
             </div>
             <div class="form-group">
                 <label for="password">Password</label>
-                <input type="password" class="form-control" id="password" name="password">
-                <font color="red"><form:errors  path="password" /></font>
+                <form:input type="password" class="form-control" id="password" path="password" />
+                <font color="red">
+                    <form:errors path="password" />
+                </font>
 
             </div>
             <div class="form-group">
                 <label for="age">Age</label>
-                <input type="number" class="form-control" id="age" name="age" min="1" max="120">
-                <font color="red"><form:errors  path="age" /></font>
+                <form:input type="number" class="form-control" id="age" path="age" />
+                <font color="red">
+                    <form:errors path="age" />
+                </font>
             </div>
             <div class="form-group">
                 <label for="gender">Gender</label>
                 <div class="form-check">
-                    <input class="form-check-input" type="radio" name="gender" id="male" value="male">
-                    <label class="form-check-label" for="male">Male</label>
+                	<form:radiobutton path="gender" value="Male" label="Male" />
                 </div>
                 <div class="form-check">
-                    <input class="form-check-input" type="radio" name="gender" id="female" value="female">
-                    <label class="form-check-label" for="female">Female</label>
+                	<form:radiobutton path="gender" value="Female" label="Female" />
                 </div>
-                <font color="red"><form:errors  path="gender" /></font>
-
+                <font color="red">
+                    <form:errors path="gender" />
+                </font>
             </div>
             <button type="submit" class="btn btn-primary btn-block" style="margin-top:20px">Register</button>
+         
+            <hr>
+            <p style="text-align:center">or</p>
+            <hr>
+            <a href="/doc-connect" style="margin-top:15px" class="btn btn-primary btn-block">Sign In</a>
+
         </form:form>
     </div>
 

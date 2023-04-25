@@ -22,9 +22,6 @@
 						<a class="nav-link" href="/doc-connect/doctor/appointments.htm">Appointments</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="#">Patients</a>
-					</li>
-					<li class="nav-item">
 						<a class="nav-link" href="/doc-connect/doctor/add/availability.htm">Add Availability</a>
 					</li>
 					<li class="nav-item">

@@ -41,7 +41,7 @@
 <body>
     <jsp:include page="PatientNavBar.jsp" />
     <div class="container my-4">
-        <form:form modelAttribute="booking" method="post" action="scheduleAppointment.htm">
+        <form:form modelAttribute="booking" method="post" action="/doc-connect/scheduleAppointment.htm">
             <div class="card-deck">
                 <!-- Iterate over the doctorAvailabilities map -->
                 <c:forEach var="doctorEntry" items="${doctorAvailabilities}">

@@ -25,8 +25,10 @@ public class PatientDAO extends DAO {
 			Patient pat = (Patient) query.uniqueResult();
 			System.out.println("patient" + pat);
 			if (pat != null) {
+				commit();
 				return true;
 			} else {
+				commit();
 				return false;
 			}
 

@@ -32,7 +32,7 @@ public class PatientController {
 			SessionStatus status, Model model, HttpServletRequest request) throws Exception {
 		ModelAndView mv = new ModelAndView();
 		patientValidator.validate(patient, result);
-
+		System.out.println("errors"+result);
 		if (result.hasErrors()) {
 			mv.setViewName("PatientRegistration");
 			return mv;

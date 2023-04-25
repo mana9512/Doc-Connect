@@ -42,7 +42,6 @@ public class DoctorDAO extends DAO {
 				rollback();
 				return null;
 			}
-
 			commit();
 			return use.get(0);
 		} catch (HibernateException e) {

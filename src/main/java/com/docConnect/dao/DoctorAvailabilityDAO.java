@@ -15,7 +15,6 @@ import com.docConnect.pojo.DoctorAvailability;
 public class DoctorAvailabilityDAO extends DAO {
 	public DoctorAvailabilityDAO() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public void save(DoctorAvailability da) throws DocConnectException {

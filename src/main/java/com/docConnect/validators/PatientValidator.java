@@ -21,7 +21,6 @@ public class PatientValidator implements Validator {
 		// TODO Auto-generated method stub
 		ValidationUtils.rejectIfEmpty(errors, "name", "Name cannot be empty", "Please provide name");
 		ValidationUtils.rejectIfEmpty(errors, "email", "Email Id cannot be empty", "Please provide email");
-		ValidationUtils.rejectIfEmpty(errors, "phone", "Contact Number cannot be empty", "Please provide number");
 		ValidationUtils.rejectIfEmpty(errors, "age", "Age cannot be empty", "Please provide age");
 		ValidationUtils.rejectIfEmpty(errors, "gender", "Gender cannot be empty", "Please provide  gender");
 		ValidationUtils.rejectIfEmpty(errors, "password", "Password cannot be empty", "Please provide password");

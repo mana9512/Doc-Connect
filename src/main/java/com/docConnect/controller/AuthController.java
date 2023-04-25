@@ -35,17 +35,20 @@ public class AuthController {
 		return new ModelAndView("Index");
 	}
 
-	@GetMapping("/register.htm")
-	public ModelAndView renderRegistrationPage(HttpServletRequest request, HttpServletResponse response, Model model) {
+	@GetMapping("/register/patient.htm")
+	public ModelAndView renderPatientRegistrationPage() {
 		ModelAndView mv = new ModelAndView();
-		if (request.getParameter("role").equals("doctor")) {
-			model.addAttribute("doctor", new Doctor());
-			mv.setViewName("DoctorRegistration");
-		} else {
-
-			model.addAttribute("patient", new Patient());
-			mv.setViewName("PatientRegistration");
-		}
+		mv.addObject("patient", new Patient());
+		mv.setViewName("PatientRegistration");
+		return mv;
+		
+	}
+	
+	@GetMapping("/register/doctor.htm")
+	public ModelAndView renderDoctorRegistrationPage() {
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("doctor", new Doctor());
+		mv.setViewName("DoctorRegistration");
 		return mv;
 	}
 
