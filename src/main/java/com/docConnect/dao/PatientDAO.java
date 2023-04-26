@@ -6,12 +6,14 @@ import java.sql.Time;
 
 import org.hibernate.HibernateException;
 import org.hibernate.query.Query;
+import org.springframework.stereotype.Component;
 
 import com.docConnect.pojo.Doctor;
 import com.docConnect.pojo.DoctorAvailability;
 import com.docConnect.pojo.Patient;
 import com.docConnect.pojo.UserRole;
 
+@Component
 public class PatientDAO extends DAO {
 
 	public boolean checkIfAuthorized(String email, String password) {

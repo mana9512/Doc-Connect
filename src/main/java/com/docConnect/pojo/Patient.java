@@ -1,6 +1,5 @@
 package com.docConnect.pojo;
 
-import java.util.Date;
 import java.util.Set;
 import javax.persistence.*;
 

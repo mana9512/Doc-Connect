@@ -13,29 +13,28 @@
     <jsp:include page="DoctorNavbar.jsp" />
 
     <div class="container my-4">
-    <h1 class="text-center mb-4">Upcoming Appointments</h1>
+    <h1 class="text-center mb-4">Cancelled Appointments</h1>
     <div class="card">
         <div class="card-body">
             <div class="table-responsive">
                 <table class="table table-bordered table-striped">
                     <thead>
                         <tr>
-                            <th>Date</th>
-                            <th>Time</th>
+                            <th>Appointment Date</th>
+                            <th>Appointment Time</th>
                             <th>Patient</th>
-                            <th>Contact</th>
-                            <th>Actions</th>
+                            <th>Cancelled Date</th>
+                            <th>Reason</th>
                         </tr>
                     </thead>
                     <tbody>
-                    <c:forEach var="appointment" items="${appointments}">
+                    <c:forEach var="cancelledData" items="${cancelledAppointments}">
                         <tr>
-                            <td>${appointment.appointmentDate}</td>
-                            <td>${appointment.appointmentTime}</td>
-                            <td>${appointment.patient.name}</td>
-                            <td>${appointment.patient.email}</td>
-                            <td><a class="cancel-btn" href="/doc-connect/doctor/cancel-appointment.htm?id=${appointment.id}"><i class="fa fa-times"></i> Cancel Appointment</a>
-</td>
+                            <td>${cancelledData.appointment.appointmentDate}</td>
+                            <td>${cancelledData.appointment.appointmentTime}</td>
+                            <td>${cancelledData.appointment.patient.name}</td>
+                            <td>${cancelledData.cancelledDate}</td>
+                            <td>${cancelledData.cancellationReason}</td>
                         </tr>
                     </c:forEach>
                     </tbody>

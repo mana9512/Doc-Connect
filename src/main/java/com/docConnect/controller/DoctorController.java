@@ -1,8 +1,7 @@
 package com.docConnect.controller;
 
-import java.sql.Time;
 import java.text.*;
-import java.time.LocalTime;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import javax.servlet.http.*;
@@ -20,6 +19,7 @@ import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.docConnect.dao.*;
+import com.docConnect.exception.DocConnectException;
 import com.docConnect.pojo.*;
 import com.docConnect.validators.DoctorValidator;
 
@@ -114,6 +114,55 @@ public class DoctorController {
 		System.out.println("-----availabilities-----"+availabilities);
 		mv.addObject("availabilities", availabilities);
 		mv.setViewName("DoctorViewAvailabilities");
+		return mv;
+	}
+	
+	
+	@GetMapping("/doctor/cancel-appointment.htm")
+	public ModelAndView renderCancelAppointmentPage(HttpServletRequest request, HttpServletResponse response, Model model) {
+		ModelAndView mv = new ModelAndView();
+		Integer appointmentId = Integer.parseInt(request.getParameter("id"));
+		AppointmentBookingDAO appdao = new AppointmentBookingDAO();
+		AppointmentBooking booking = null;
+		try {
+			booking = appdao.getAppointmentById(appointmentId);
+		} catch (DocConnectException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		mv.addObject("booking", booking);
+		mv.setViewName("CancelAppointment");
+		return mv;
+	}
+	
+	@PostMapping("/doctor/cancel-appointment.htm")
+	public ModelAndView cancelAppointment(@ModelAttribute("cancelled") CancelledAppointment cancelled, BindingResult result, SessionStatus status, Model model, HttpServletRequest request) throws Exception {
+		ModelAndView mv = new ModelAndView();
+		Integer appointmentId = Integer.parseInt(request.getParameter("appointmentId"));
+		System.out.println("---appointment-id----"+appointmentId);
+		HttpSession session = request.getSession();
+		Doctor doctor = (Doctor) session.getAttribute("doctor");
+		AppointmentBookingDAO appdao = new AppointmentBookingDAO();
+		AppointmentBooking appointment = appdao.getAppointmentById(appointmentId);
+		cancelled.setAppointment(appointment);
+		cancelled.setCancelledDate(LocalDateTime.now());
+		cancelled.setDoctor(doctor);
+		CancelledAppointmentDAO cdao = new CancelledAppointmentDAO();
+		System.out.println("--cancelled appointment data-->"+cancelled);
+		cdao.save(cancelled);
+		mv.setViewName("redirect:/doctor/cancelled-appointments.htm");
+		return mv;
+	}
+	
+	@GetMapping("/doctor/cancelled-appointments.htm")
+	public ModelAndView renderDoctorCancelledAppointments(HttpServletRequest request, HttpServletResponse response, Model model) throws Exception {
+		ModelAndView mv = new ModelAndView();
+		CancelledAppointmentDAO cancelDao = new CancelledAppointmentDAO();
+		HttpSession session = request.getSession();
+		Doctor doctor = (Doctor) session.getAttribute("doctor");
+		List<CancelledAppointment> appointments = cancelDao.fetchCancelledAppointments(doctor);
+		mv.addObject("cancelledAppointments", appointments);
+		mv.setViewName("DoctorCancelledAppointments");
 		return mv;
 	}
 

@@ -1,11 +1,13 @@
 package com.docConnect.dao;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.hibernate.HibernateException;
 import org.hibernate.query.Query;
 import org.springframework.stereotype.Component;
 
+import com.docConnect.exception.DocConnectException;
 import com.docConnect.pojo.*;
 
 @Component
@@ -24,7 +26,7 @@ public class AppointmentBookingDAO extends DAO {
 			close();
 		} catch (HibernateException e) {
 			rollback();
-			throw new Exception("Error while saving adding booking ");
+			throw new Exception("Error while saving booking ");
 		}
 	}
 
@@ -32,15 +34,21 @@ public class AppointmentBookingDAO extends DAO {
 		try {
 			begin();
 			Query query;
+			LocalDate localDate = LocalDate.now();
+			java.sql.Date currentDate = java.sql.Date.valueOf(localDate);
+
+
 			if(obj instanceof Patient) {
 				Patient patient = (Patient) obj;
-				query = getSession().createQuery("From AppointmentBooking where patient=:patient");
+				
+				query = getSession().createQuery("FROM AppointmentBooking a WHERE a.id NOT IN ( SELECT c.appointmentId FROM CancelledAppointment c) AND a.patient=:patient AND a.appointmentDate >= :currentDate");
 				query.setParameter("patient", patient);
 			} else {
 				Doctor doc = (Doctor) obj;
-				query = getSession().createQuery("From AppointmentBooking where doctor=:doctor");
+				query = getSession().createQuery("FROM AppointmentBooking a WHERE a.id NOT IN ( SELECT c.appointmentId FROM CancelledAppointment c) AND a.doctor=:doctor AND a.appointmentDate >= :currentDate");
 				query.setParameter("doctor", doc);
 			}
+			query.setParameter("currentDate", currentDate);
 			
 			List<AppointmentBooking> appointments = query.list();
 			commit();
@@ -51,6 +59,30 @@ public class AppointmentBookingDAO extends DAO {
 			return null;
 		}
 
+	}
+	
+	public AppointmentBooking getAppointmentById(Integer id) throws DocConnectException {
+
+		try {
+			begin();
+			String hql = "From AppointmentBooking where id=" + id;
+			System.out.println(hql);
+			@SuppressWarnings("rawtypes")
+			Query q = getSession().createQuery(hql);
+			@SuppressWarnings("unchecked")
+			List<AppointmentBooking> app = q.list();
+
+			if (app.size() == 0) {
+				rollback();
+				return null;
+			}
+
+			commit();
+			return app.get(0);
+		} catch (HibernateException e) {
+			rollback();
+			throw new DocConnectException("Cannot find a appointment with specified Id", e);
+		}
 	}
 
 }
